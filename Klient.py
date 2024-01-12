@@ -1,6 +1,10 @@
 from tkinter import *
 from bazaUzytkownikow import bazaUzytkownikow
+from bazaSamochodow import bazaSamochodow
+from ZarzadzajSamochodami import ZarzadzajSamochodami
 import tkinter as tk
+import tkinter.ttk as ttk
+
 
 class Klient:
     def __init__(self,nazwaUzytkownika,idUzytkownika,hasloUzytkownika,imie,nazwisko,liczba_wypozyczonych_samochodow,pesel,numer_telefonu):
@@ -13,6 +17,7 @@ class Klient:
         self.Pesel = pesel
         self.Numer_Telefonu = numer_telefonu
         self.idUzytkownika = idUzytkownika
+        self.baza=bazaSamochodow()
         
         self.okno = Tk()
         self.okno.configure(bg="#708090")
@@ -27,8 +32,70 @@ class Klient:
         przyciskZmianyDanych = Button(self.okno, text="Zmiana Danych", command=self.aktulizujProfil)
         przyciskZmianyDanych.pack()
 
+        self.bazaSamochodow = bazaSamochodow()
+        self.ZarzadzajSamochodami = ZarzadzajSamochodami(self.okno)
+
+        przyciskRezerwacji = Button(self.okno, text="Rezerwuj Samochód", command=self.rezerwujSamochod )
+        przyciskRezerwacji.pack()
+
         przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
         przyciskWyloguj.pack()
+
+
+    def rezerwujSamochod(self):
+        self.oknoRezerwacjiSamochodu = Toplevel(self.okno)
+        self.oknoRezerwacjiSamochodu.geometry("500x500")
+        self.oknoRezerwacjiSamochodu.configure(bg="#708090")
+
+        myLabel = Label(self.oknoRezerwacjiSamochodu, text="Rezerwuj Samochód", bg="#708090")
+        myLabel.pack()
+
+        self.odswiezDropdownMenuRezerwacja()
+
+        label_dropdown = Label(self.oknoRezerwacjiSamochodu, text="Wybierz samochód:")
+        label_dropdown.pack()
+
+        self.dropdown_samochody = ttk.Combobox(self.oknoRezerwacjiSamochodu, values=self.samochody_list)
+        self.dropdown_samochody.pack()
+
+        przycisk_usun = Button(self.oknoRezerwacjiSamochodu, text="Rezerwuj samochód", command=self.rezerwujWybranySamochod)
+        przycisk_usun.pack()
+
+
+    def rezerwujWybranySamochod(self):
+        wybrany_samochod = self.dropdown_samochody.get()
+        id_samochodu = wybrany_samochod.split(" - ")[0]  # Pobierz ID samochodu z tekstu
+        print("IDSAMOCHODU----",id_samochodu)
+
+        cur = self.baza.conn.cursor()
+        sql = "UPDATE Samochody SET dostepnosc = 'Zarezerwowany' WHERE ID = %s"
+        cur.execute(sql, (id_samochodu,))
+        self.baza.conn.commit()
+        cur.close()
+
+        id_klienta=self.idUzytkownika
+
+        cur = self.baza.conn.cursor()
+        sql = "INSERT INTO rezerwacje (id_klienta, id_samochodu) VALUES (%s, %s)"
+        cur.execute(sql, (id_klienta, id_samochodu))
+        self.baza.conn.commit()
+        cur.close()
+
+        print("Samochód został zarezerwowany")
+        self.oknoRezerwacjiSamochodu.withdraw()
+        
+    def odswiezDropdownMenuRezerwacja(self):
+        samochody = self.baza.wyswietlWszystkieSamochody()
+        if samochody is not None:
+            self.samochody_list = [
+                f"{samochod[7]} - {samochod[0]} {samochod[2]}"
+                for samochod in samochody
+                if samochod[8] == "Dostępny" 
+            ]
+            print(self.samochody_list)
+        else:
+            print("Błąd podczas pobierania danych.")
+
 
     def pokazDane(self):
         print(f"Nazwa użytkownika: {self.nazwaUzytkownika}")
@@ -104,6 +171,19 @@ class Klient:
         from Menadzer_Logowania import Logowanie
         oknoLogowania = Logowanie()
         self.okno.destroy()
+
+
+    # def rezerwacjaDB(self):
+        
+    #     id_klienta=self.Klient.idUzytkownika
+    #     id_samochodu=self.Samochod.ID
+
+    #     cur = self.baza.conn.cursor()
+    #     sql = "INSERT INTO rezerwacje (id_klienta, id_samochodu) VALUES (%s, %s)"
+    #     cur.execute(sql, (id_klienta, id_samochodu))
+    #     self.baza.conn.commit()
+    #     cur.close()
+
 
        
 

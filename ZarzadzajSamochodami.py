@@ -48,7 +48,7 @@ class ZarzadzajSamochodami:
             self.samochody_list = [f"{samochod[7]} - {samochod[0]} {samochod[2]}" for samochod in samochody]
             print(self.samochody_list)
         else:
-            print("Błąd podczas pobierania danych.")
+            print("Błąd podczas pobierania danych.")         
 
 
     def dodajSamochod(self):    

@@ -17,6 +17,14 @@ class bazaSamochodow:
         rows = cur.fetchall()
         cur.close()
         return rows
+    
+    def wyswietlanieRezerwacji(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT * FROM rezerwacje")
+        rows = cur.fetchall()
+        cur.close()
+        return rows
+    
 
     def zamknij_polaczenie(self):
         self.conn.close()

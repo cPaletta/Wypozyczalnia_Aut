@@ -21,6 +21,7 @@ class Pracownik(Klient):
 
         self.bazaUzytkownikow = bazaUzytkownikow()
         self.ZarzadzajSamochodami = ZarzadzajSamochodami(self.okno)
+        self.bazaSamochodow = bazaSamochodow()
 
         przyciskWyswietleniaUzytkownikow = Button(self.okno, text="Wyswietl uzytkownikow", command=self.wyswietlUzytkownikow)
         przyciskWyswietleniaUzytkownikow.pack()
@@ -28,16 +29,35 @@ class Pracownik(Klient):
         przyciskWyswietleniaSamochodow = Button(self.okno, text="Wyswietl samochody", command=self.wyswietlSamochody)
         przyciskWyswietleniaSamochodow.pack()
 
-        self.bazaSamochodow = bazaSamochodow()
-
         przyciskDodaniaSamochodow = Button(self.okno, text="Dodaj samochod", command=self.ZarzadzajSamochodami.dodajSamochod)
         przyciskDodaniaSamochodow.pack()
         
         przyciskUsuwaniaSamochodow = Button(self.okno, text="Usun samochod", command=self.ZarzadzajSamochodami.usunSamochod)
         przyciskUsuwaniaSamochodow.pack()
 
+        przyciskWyswietlRezerwacje = Button(self.okno, text="Wyświetl rezerwacje", command=self.wyswietlRezerwacje)
+        przyciskWyswietlRezerwacje.pack()
+
         przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
         przyciskWyloguj.pack()
+
+        myLabell = Label(self.okno, text="Dostępne samochody:", bg="#708090")
+        myLabell.pack()
+
+        liczba = self.wyswietlSamochodyDost()
+        myLabell.configure(text=f"Liczba dostępnych samochodów: {liczba}")
+
+        myLabelR = Label(self.okno, text="Zarezerwowane samochody:", bg="#708090")
+        myLabelR.pack()
+
+        liczba = self.wyswietlSamochodyZarezerwowane()
+        myLabelR.configure(text=f"Liczba zarezerwowanych samochodów: {liczba}")
+
+        myLabelR = Label(self.okno, text="Niedostepne samochody:", bg="#708090")
+        myLabelR.pack()
+
+        liczba = self.wyswietlSamochodyNiedostepne()
+        myLabelR.configure(text=f"Liczba niedostepnych samochodów: {liczba}")
 
 
         self.lista = Listbox(self.okno, selectmode=SINGLE, width=250, height=250)
@@ -62,8 +82,50 @@ class Pracownik(Klient):
                 self.lista.insert(END, samochod)
         else:
             print("Nie znaleziono samochodow")
+
+    def wyswietlSamochodyDost(self):
+        samochody = self.bazaSamochodow.wyswietlWszystkieSamochody()
+        liczba = 0
+        for samochod in samochody:
+            if samochod[8] == "Dostępny":
+                liczba += 1
+        return liczba
+
+    def wyswietlSamochodyZarezerwowane(self):
+        samochody = self.bazaSamochodow.wyswietlWszystkieSamochody()
+        liczba = 0
+        for samochod in samochody:
+            if samochod[8] == "Zarezerwowany":
+                liczba += 1
+        return liczba
+
+    def wyswietlSamochodyWypozyczone(self):
+        samochody = self.bazaSamochodow.wyswietlWszystkieSamochody()
+        liczba = 0
+        for samochod in samochody:
+            if samochod[8] == "Wypożyczony":
+                liczba += 1
+        return liczba
+
+    def wyswietlSamochodyNiedostepne(self):
+        samochody = self.bazaSamochodow.wyswietlWszystkieSamochody()
+        liczba = 0
+        for samochod in samochody:
+            if samochod[8] != "Dostępny":
+                liczba += 1
+        return liczba
     
-    
+    def wyswietlRezerwacje(self):
+        self.lista.delete(0, END)
+        samochody = self.bazaSamochodow.wyswietlanieRezerwacji()
+        if samochody:
+            self.lista.insert(END, "ID_klienta | ID_auta")
+            for samochod in samochody:
+                self.lista.insert(END, samochod)
+        else:
+            print("Nie znaleziono samochodow")
+
+
 
 
 

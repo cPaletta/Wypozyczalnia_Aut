@@ -44,6 +44,24 @@ class Admin(Pracownik):
         przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
         przyciskWyloguj.pack()
 
+        myLabell = Label(self.okno, text="Dostępne samochody:", bg="#708090")
+        myLabell.pack()
+
+        liczba = self.wyswietlSamochodyDost()
+        myLabell.configure(text=f"Liczba dostępnych samochodów: {liczba}")
+
+        myLabelR = Label(self.okno, text="Zarezerwowane samochody:", bg="#708090")
+        myLabelR.pack()
+
+        liczba = self.wyswietlSamochodyZarezerwowane()
+        myLabelR.configure(text=f"Liczba zarezerwowanych samochodów: {liczba}")
+
+        myLabelR = Label(self.okno, text="Niedostepne samochody:", bg="#708090")
+        myLabelR.pack()
+
+        liczba = self.wyswietlSamochodyNiedostepne()
+        myLabelR.configure(text=f"Liczba niedostepnych samochodów: {liczba}")
+
 
         self.lista = Listbox(self.okno, selectmode=SINGLE, width=250, height=250)
         self.lista.pack()
