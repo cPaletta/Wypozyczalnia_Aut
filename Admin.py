@@ -27,6 +27,7 @@ class Admin(Pracownik):
         self.bazaUzytkownikow = bazaUzytkownikow()
         self.ZarzadzajSamochodami = ZarzadzajSamochodami(self.okno)
         self.ZarzadzajOsoba = ZarzadzajOsobami(self.okno)
+        self.baza=bazaSamochodow()
 
         przyciskDodaniaSamochodow = Button(self.okno, text="Dodaj samochod", command=self.ZarzadzajSamochodami.dodajSamochod)
         przyciskDodaniaSamochodow.pack()
@@ -40,6 +41,12 @@ class Admin(Pracownik):
 
         usunOsobe = Button(self.okno, text="Usun osobe", command=self.ZarzadzajOsoba.usunOsobe)
         usunOsobe.pack()
+
+        przyciskWypozycz = Button(self.okno, text="Wypozycz", command=self.WypozyczSamochod)
+        przyciskWypozycz.pack()
+
+        przyciskOddaj = Button(self.okno, text="Oddaj", command=self.OddajSamochod)
+        przyciskOddaj.pack()
 
         przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
         przyciskWyloguj.pack()

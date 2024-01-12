@@ -1,6 +1,7 @@
 
 from tkinter import *
 import tkinter as tk
+import tkinter.ttk as ttk
 
 from Klient import Klient
 from bazaSamochodow import bazaSamochodow
@@ -15,6 +16,7 @@ class Pracownik(Klient):
         self.okno = Tk()
         self.okno.configure(bg="#708090")
         self.okno.geometry("500x500")
+        self.baza=bazaSamochodow()
 
         myLabel = Label(self.okno, text="Pracownik", bg="#708090")
         myLabel.pack()
@@ -37,6 +39,12 @@ class Pracownik(Klient):
 
         przyciskWyswietlRezerwacje = Button(self.okno, text="Wyświetl rezerwacje", command=self.wyswietlRezerwacje)
         przyciskWyswietlRezerwacje.pack()
+
+        przyciskWypozycz = Button(self.okno, text="Wypozycz", command=self.WypozyczSamochod)
+        przyciskWypozycz.pack()
+
+        przyciskOddaj = Button(self.okno, text="Oddaj", command=self.OddajSamochod)
+        przyciskOddaj.pack()
 
         przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
         przyciskWyloguj.pack()
@@ -124,6 +132,104 @@ class Pracownik(Klient):
                 self.lista.insert(END, samochod)
         else:
             print("Nie znaleziono samochodow")
+
+#WYpożyczanie
+
+    def WypozyczSamochod(self):
+        self.oknoWypozyczSamochodu = Toplevel(self.okno)
+        self.oknoWypozyczSamochodu.geometry("500x500")
+        self.oknoWypozyczSamochodu.configure(bg="#708090")
+
+        myLabel = Label(self.oknoWypozyczSamochodu, text="Wypozycz Samochód", bg="#708090")
+        myLabel.pack()
+
+        self.odswiezDropdownMenuWypozycz()
+
+        label_dropdown = Label(self.oknoWypozyczSamochodu, text="Wybierz samochód:")
+        label_dropdown.pack()
+
+        self.dropdown_samochody = ttk.Combobox(self.oknoWypozyczSamochodu, values=self.samochody_list)
+        self.dropdown_samochody.pack()
+
+        przycisk_usun = Button(self.oknoWypozyczSamochodu, text="Wypozycz samochód", command=self.WypozyczWybranySamochod)
+        przycisk_usun.pack()
+
+
+    def WypozyczWybranySamochod(self):
+        wybrany_samochod = self.dropdown_samochody.get()
+        id_samochodu = wybrany_samochod.split(" - ")[0]  # Pobierz ID samochodu z tekstu
+        print("IDSAMOCHODU----",id_samochodu)
+
+        cur = self.baza.conn.cursor()
+        sql = "UPDATE Samochody SET dostepnosc = 'Wypozyczony' WHERE ID = %s"
+        cur.execute(sql, (id_samochodu,))
+        self.baza.conn.commit()
+        cur.close()
+
+
+        print("Samochód został Wypozyczony")
+        self.oknoWypozyczSamochodu.withdraw()
+        
+    def odswiezDropdownMenuWypozycz(self):
+        samochody = self.baza.wyswietlWszystkieSamochody()
+        if samochody is not None:
+            self.samochody_list = [
+                f"{samochod[7]} - {samochod[0]} {samochod[2]}"
+                for samochod in samochody
+                if samochod[8] == "Zarezerwowany" 
+            ]
+            print(self.samochody_list)
+        else:
+            print("Błąd podczas pobierania danych.")
+
+#Oddawanie
+    def OddajSamochod(self):
+        self.oknoOddajSamochodu = Toplevel(self.okno)
+        self.oknoOddajSamochodu.geometry("500x500")
+        self.oknoOddajSamochodu.configure(bg="#708090")
+
+        myLabel = Label(self.oknoOddajSamochodu, text="Oddaj Samochód", bg="#708090")
+        myLabel.pack()
+
+        self.odswiezDropdownMenuOddaj()
+
+        label_dropdown = Label(self.oknoOddajSamochodu, text="Wybierz samochód:")
+        label_dropdown.pack()
+
+        self.dropdown_samochody = ttk.Combobox(self.oknoOddajSamochodu, values=self.samochody_list)
+        self.dropdown_samochody.pack()
+
+        przycisk_usun = Button(self.oknoOddajSamochodu, text="Oddaj samochód", command=self.OddajWybranySamochod)
+        przycisk_usun.pack()
+
+
+    def OddajWybranySamochod(self):
+        wybrany_samochod = self.dropdown_samochody.get()
+        id_samochodu = wybrany_samochod.split(" - ")[0]  # Pobierz ID samochodu z tekstu
+        print("IDSAMOCHODU----", id_samochodu)
+
+        cur = self.baza.conn.cursor()
+        sql = "UPDATE Samochody SET dostepnosc = 'Dostępny' WHERE ID = %s"
+        cur.execute(sql, (id_samochodu,))
+        self.baza.conn.commit()
+        cur.close()
+
+
+        print("Samochód został Oddany")
+        self.oknoOddajSamochodu.withdraw()
+
+
+    def odswiezDropdownMenuOddaj(self):
+        samochody = self.baza.wyswietlWszystkieSamochody()
+        if samochody is not None:
+            self.samochody_list = [
+            f"{samochod[7]} - {samochod[0]} {samochod[2]}"
+            for samochod in samochody
+            if samochod[8] == "Wypozyczony"
+            ]
+            print(self.samochody_list)
+        else:
+            print("Błąd podczas pobierania danych.")
 
 
 
