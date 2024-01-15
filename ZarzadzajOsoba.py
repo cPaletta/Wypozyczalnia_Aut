@@ -12,21 +12,22 @@ class ZarzadzajOsobami:
 
     def usunOsobe(self):
         self.oknoUsunieciaOsoby = Toplevel(self.okno)
-        self.oknoUsunieciaOsoby.geometry("500x500")
-        self.oknoUsunieciaOsoby.configure(bg="#708090")
+        self.oknoUsunieciaOsoby.geometry("500x200")
+        self.oknoUsunieciaOsoby.configure(bg="#A5978B")
 
-        myLabel = Label(self.oknoUsunieciaOsoby, text="Usuń osobę", bg="#708090")
+        myLabel = Label(self.oknoUsunieciaOsoby, text="Usuń użytkownika", bg="#A5978B", font=("Georgia", 20))
         myLabel.pack()
+       
 
         self.odswiezDropdownMenu()
 
-        label_dropdown = Label(self.oknoUsunieciaOsoby, text="Wybierz osobę:")
+        label_dropdown = Label(self.oknoUsunieciaOsoby, text="Wybierz osobę:", bg="#A5978B", font=("Georgia", 12))
         label_dropdown.pack()
 
-        self.dropdown_osoby = ttk.Combobox(self.oknoUsunieciaOsoby, values=self.osoby_list)
+        self.dropdown_osoby = ttk.Combobox(self.oknoUsunieciaOsoby, values=self.osoby_list, font=("Georgia", 12))
         self.dropdown_osoby.pack()
 
-        przycisk_usun = Button(self.oknoUsunieciaOsoby, text="Usuń osobę", command=self.usunWybranaOsobe)
+        przycisk_usun = Button(self.oknoUsunieciaOsoby, text="Usuń osobę", command=self.usunWybranaOsobe, bg="white", font=("Georgia", 12))
         przycisk_usun.pack()
 
     def usunWybranaOsobe(self):
@@ -54,21 +55,21 @@ class ZarzadzajOsobami:
     def dodajOsobe(self):
         self.oknoDodaniaOsoby = Toplevel(self.okno)
         self.oknoDodaniaOsoby.geometry("500x500")
-        self.oknoDodaniaOsoby.configure(bg="#708090")
+        self.oknoDodaniaOsoby.configure(bg="#A5978B")
 
-        myLabel = Label(self.oknoDodaniaOsoby, text="Dodaj osobę", bg="#708090")
+        myLabel = Label(self.oknoDodaniaOsoby, text="Dodaj osobę", bg="#A5978B", font=("Georgia", 12))
         myLabel.pack()
 
         labels = ["Nazwa użytkownika:", "Hasło:", "Imię:", "Nazwisko:", "Liczba wypożyczonych samochodów:", "Pesel:", "Numer telefonu:"]
         entries = []
         for label_text in labels:
-            label = Label(self.oknoDodaniaOsoby, text=label_text)
+            label = Label(self.oknoDodaniaOsoby, text=label_text, bg="#A5978B", font=("Georgia", 12))
             label.pack()
-            entry = Entry(self.oknoDodaniaOsoby)
+            entry = Entry(self.oknoDodaniaOsoby, bg="#A5978B", font=("Georgia", 12))
             entry.pack()
             entries.append(entry)
 
-        przyciskDodaniaOsoby = Button(self.oknoDodaniaOsoby, text="Dodaj osobę", command=lambda: self.zapiszOsobe(entries))
+        przyciskDodaniaOsoby = Button(self.oknoDodaniaOsoby, text="Dodaj osobę", command=lambda: self.zapiszOsobe(entries), bg="#A5978B", font=("Georgia", 12))
         przyciskDodaniaOsoby.pack()
 
     def zapiszOsobe(self, entries):

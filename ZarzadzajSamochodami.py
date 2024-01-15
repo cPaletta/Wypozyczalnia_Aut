@@ -11,21 +11,21 @@ class ZarzadzajSamochodami:
         self.baza = bazaSamochodow()
     def usunSamochod(self):
         self.oknoUsunieciaSamochodu = Toplevel(self.okno)
-        self.oknoUsunieciaSamochodu.geometry("500x500")
-        self.oknoUsunieciaSamochodu.configure(bg="#708090")
+        self.oknoUsunieciaSamochodu.geometry("500x300")
+        self.oknoUsunieciaSamochodu.configure(bg="#A5978B")
 
-        myLabel = Label(self.oknoUsunieciaSamochodu, text="Usun samochod", bg="#708090")
+        myLabel = Label(self.oknoUsunieciaSamochodu, text="Usuń samochód", bg="#A5978B", font=("Georgia", 15))
         myLabel.pack()
 
         self.odswiezDropdownMenu()
 
-        label_dropdown = Label(self.oknoUsunieciaSamochodu, text="Wybierz samochód:")
+        label_dropdown = Label(self.oknoUsunieciaSamochodu, text="Wybierz samochód:", bg="#A5978B", font=("Georgia", 12))
         label_dropdown.pack()
 
         self.dropdown_samochody = ttk.Combobox(self.oknoUsunieciaSamochodu, values=self.samochody_list)
         self.dropdown_samochody.pack()
 
-        przycisk_usun = Button(self.oknoUsunieciaSamochodu, text="Usuń samochód", command=self.usunWybranySamochod)
+        przycisk_usun = Button(self.oknoUsunieciaSamochodu, text="Usuń samochód", command=self.usunWybranySamochod, bg="white", font=("Georgia", 12))
         przycisk_usun.pack()
 
     def usunWybranySamochod(self):
@@ -54,60 +54,60 @@ class ZarzadzajSamochodami:
     def dodajSamochod(self):    
         self.oknoDodaniaSamochodu = Toplevel(self.okno)
         self.oknoDodaniaSamochodu.geometry("500x500")
-        self.oknoDodaniaSamochodu.configure(bg="#708090")
+        self.oknoDodaniaSamochodu.configure(bg="#A5978B")
 
-        myLabel = Label(self.oknoDodaniaSamochodu, text="Dodaj samochod", bg="#708090")
+        myLabel = Label(self.oknoDodaniaSamochodu, text="Dodaj samochód", bg="#A5978B", font=("Georgia", 12))
         myLabel.pack()
 
         # Etykieta i pole dla marki samochodu
-        label_marka = Label(self.oknoDodaniaSamochodu, text="Marka:")
+        label_marka = Label(self.oknoDodaniaSamochodu, text="Marka:", bg="#A5978B", font=("Georgia", 12))
         label_marka.pack()
-        self.wejscieMarka = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieMarka = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieMarka.pack()
 
         # Etykieta i pole dla kategorii samochodu
-        label_kategoria = Label(self.oknoDodaniaSamochodu, text="Kategoria:")
+        label_kategoria = Label(self.oknoDodaniaSamochodu, text="Kategoria:", bg="#A5978B", font=("Georgia", 12))
         label_kategoria.pack()
-        self.wejscieKategoria = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieKategoria = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieKategoria.pack()
 
         # Etykieta i pole dla modelu samochodu
-        label_model = Label(self.oknoDodaniaSamochodu, text="Model:")
+        label_model = Label(self.oknoDodaniaSamochodu, text="Model:", bg="#A5978B", font=("Georgia", 12))
         label_model.pack()
-        self.wejscieModel = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieModel = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieModel.pack()
 
         # Etykieta i pole dla VIN samochodu
-        label_vin = Label(self.oknoDodaniaSamochodu, text="VIN:")
+        label_vin = Label(self.oknoDodaniaSamochodu, text="VIN:", bg="#A5978B", font=("Georgia", 12))
         label_vin.pack()
-        self.wejscieVin = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieVin = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieVin.pack()
 
         # Etykieta i pole dla numeru rejestracyjnego samochodu
-        label_nr_rejestracyjny = Label(self.oknoDodaniaSamochodu, text="Nr Rejestracyjny:")
+        label_nr_rejestracyjny = Label(self.oknoDodaniaSamochodu, text="Nr Rejestracyjny:", bg="#A5978B", font=("Georgia", 12))
         label_nr_rejestracyjny.pack()
-        self.wejscieNrRejestracyjny = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieNrRejestracyjny = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieNrRejestracyjny.pack()
 
         # Etykieta i pole dla opisu samochodu
-        label_opis = Label(self.oknoDodaniaSamochodu, text="Opis:")
+        label_opis = Label(self.oknoDodaniaSamochodu, text="Opis:", bg="#A5978B", font=("Georgia", 12))
         label_opis.pack()
-        self.wejscieOpis = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieOpis = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieOpis.pack()
 
         # Etykieta i pole dla historii samochodu
-        label_historia = Label(self.oknoDodaniaSamochodu, text="Historia:")
+        label_historia = Label(self.oknoDodaniaSamochodu, text="Historia:", bg="#A5978B", font=("Georgia", 12))
         label_historia.pack()
-        self.wejscieHistoria = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieHistoria = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieHistoria.pack()
 
         # Etykieta i pole dla dostępności samochodu
-        label_dostepnosc = Label(self.oknoDodaniaSamochodu, text="Dostępność:")
+        label_dostepnosc = Label(self.oknoDodaniaSamochodu, text="Dostępność:", bg="#A5978B", font=("Georgia", 12))
         label_dostepnosc.pack()
-        self.wejscieDostepnosc = Entry(self.oknoDodaniaSamochodu)
+        self.wejscieDostepnosc = Entry(self.oknoDodaniaSamochodu, bg="#A5978B", font=("Georgia", 12))
         self.wejscieDostepnosc.pack()
 
-        przyciskDodaniaSamochodu = Button(self.oknoDodaniaSamochodu, text="Dodaj samochód", command=self.zapiszSamochod)
+        przyciskDodaniaSamochodu = Button(self.oknoDodaniaSamochodu, text="Dodaj samochód", command=self.zapiszSamochod, bg="#A5978B", font=("Georgia", 12))
         przyciskDodaniaSamochodu.pack()
 
     def zapiszSamochod(self):

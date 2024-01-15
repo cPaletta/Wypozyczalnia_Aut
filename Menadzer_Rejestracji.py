@@ -6,51 +6,52 @@ class Rejestracja:
     
     def __init__(self):
         self.okno = Tk()
-        self.okno.configure(bg="#708090")
+        self.okno.configure(bg="#A5978B")
         self.okno.geometry("500x500")
 
-        myLabel = Label(self.okno, text="Witaj w wypożyczalni aut!", bg="#708090")
+        myLabel = Label(self.okno, text="Aby stworzyć konto podaj \n następujące dane:", bg="#A5978B", font=("Georgia", 20))
         myLabel.pack()
 
         # Etykieta i pole dla nazwy użytkownika
-        label_nazwa_uzytkownika = Label(self.okno, text="Nazwa użytkownika:")
+        label_nazwa_uzytkownika = Label(self.okno, text="Nazwa użytkownika:",bg="#A5978B", font=("Georgia", 12))
         label_nazwa_uzytkownika.pack()
-        self.wejscieNazwy = Entry(self.okno)
+        self.wejscieNazwy = Entry(self.okno,bg="#A5978B", font=("Georgia", 12))
         self.wejscieNazwy.pack()
 
         # Etykieta i pole dla hasła
-        label_haslo = Label(self.okno, text="Hasło:")
+        label_haslo = Label(self.okno, text="Hasło:",bg="#A5978B", font=("Georgia", 12))
         label_haslo.pack()
-        self.wejscieHasla = Entry(self.okno, show="*")
+        self.wejscieHasla = Entry(self.okno, show="*",bg="#A5978B", font=("Georgia", 12))
         self.wejscieHasla.pack()
 
         # Etykieta i pole dla imienia
-        label_imie = Label(self.okno, text="Imię:")
+        label_imie = Label(self.okno, text="Imię:",bg="#A5978B", font=("Georgia", 12))
         label_imie.pack()
-        self.wejscieImie = Entry(self.okno)
+        self.wejscieImie = Entry(self.okno,bg="#A5978B", font=("Georgia", 12))
         self.wejscieImie.pack()
 
         # Etykieta i pole dla nazwiska
-        label_nazwisko = Label(self.okno, text="Nazwisko:")
+        label_nazwisko = Label(self.okno, text="Nazwisko:",bg="#A5978B", font=("Georgia", 12))
         label_nazwisko.pack()
-        self.wejscieNazwisko = Entry(self.okno)
+        self.wejscieNazwisko = Entry(self.okno,bg="#A5978B", font=("Georgia", 12))
         self.wejscieNazwisko.pack()
 
 
         # Etykieta i pole dla PESEL
-        label_pesel = Label(self.okno, text="PESEL:")
+        label_pesel = Label(self.okno, text="PESEL:",bg="#A5978B", font=("Georgia", 12))
         label_pesel.pack()
-        self.wejsciePesel = Entry(self.okno)
+        self.wejsciePesel = Entry(self.okno,bg="#A5978B", font=("Georgia", 12))
         self.wejsciePesel.pack()
 
         # Etykieta i pole dla numeru telefonu
-        label_numer_telefonu = Label(self.okno, text="Numer telefonu:")
+        label_numer_telefonu = Label(self.okno, text="Numer telefonu:",bg="#A5978B", font=("Georgia", 12))
         label_numer_telefonu.pack()
-        self.wejscieNumerTelefonu = Entry(self.okno)
+        self.wejscieNumerTelefonu = Entry(self.okno,bg="#A5978B", font=("Georgia", 12))
         self.wejscieNumerTelefonu.pack() 
         
-        przyciskTworzeniaKonta = Button(self.okno, text="Stworz Konto", command=self.tworzenieKonta)
+        przyciskTworzeniaKonta = Button(self.okno, text="Stworz Konto", command=self.tworzenieKonta,bg="#A5978B", font=("Georgia", 12))
         przyciskTworzeniaKonta.pack()
+        przyciskTworzeniaKonta.place(x=190,y=360)
 
 
 

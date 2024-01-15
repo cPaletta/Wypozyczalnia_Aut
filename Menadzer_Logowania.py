@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
+from tkinter import font
 
 from Menadzer_Rejestracji import Rejestracja
 from bazaUzytkownikow import bazaUzytkownikow
@@ -13,23 +14,51 @@ from Admin import Admin
 class Logowanie:
     def __init__(self):
         self.okno = Tk()
-        self.okno.configure(bg="#708090", height=431, width=626)
-        self.okno.geometry("500x500")
+        self.okno.configure(bg="#5C4742", height=400, width=800)
+        self.okno.geometry("670x470")
 
-        myLabel = Label(self.okno, text="Witaj w wypożyczalni aut!", bg="#708090")
+        czcionka1 = font.Font(family="Georgia", size=20, weight="normal", slant="roman")
+        czcionka2 = font.Font(family="Georgia", size=12)
+        czcionka3 = font.Font(family="Georgia", size=16)
+
+        bezowyPasek = Frame(self.okno, bg="#A5978B", width=370)  
+        bezowyPasek.pack(side="left", fill="y") 
+
+        myLabel = Label(self.okno, text="Witaj w wypożyczalni \n samochodów!", bg="#A5978B", font=czcionka1)
         myLabel.pack()
+        myLabel.place(x=40,y=30)
 
-        self.wejscieNazwy = Entry(self.okno)
+        myLabel2 = Label(self.okno, text = "Zaloguj się na swoje konto", bg="#5C4742", font=czcionka3)
+        myLabel2.pack()
+        myLabel2.place(x=400,y=55)
+
+        self.wejscieNazwy = Entry(self.okno, font=("Arial", 12), width=20, borderwidth=3, highlightcolor="black")
         self.wejscieNazwy.pack()
+        self.wejscieNazwy.place(x=440, y=120)
+       
+        myLabel5= Label(self.okno, text = "Login:", bg="#5C4742", font=czcionka2)
+        myLabel5.pack()
+        myLabel5.place(x=390,y=120)
 
-        self.wejscieHasla = Entry(self.okno, show="*")
+        self.wejscieHasla = Entry(self.okno, show="*", font=("Arial", 12), width=20, borderwidth=3, highlightcolor="black")
         self.wejscieHasla.pack()
+        self.wejscieHasla.place(x=440, y=160)
 
-        przyciskLogowania = Button(self.okno, text="Login", command=self.otrzymajDane)
+        myLabel4 = Label(self.okno, text = "Hasło:", bg="#5C4742", font=czcionka2)
+        myLabel4.pack()
+        myLabel4.place(x=390,y=160)
+
+        przyciskLogowania = Button(self.okno, text="Zaloguj się", command=self.otrzymajDane, font=("Georgia", 11), bg="#FFF5EE", fg="black", height=1, borderwidth=2, relief="sunken")
         przyciskLogowania.pack()
+        przyciskLogowania.place(x=490, y=200)
 
-        przyciskRejestracji = Button(self.okno, text="Register", command=self.otworzRejestracje)
+        myLabel3 = Label(self.okno, text="Nie masz konta?\n Klinkij przycisk zarejestruj", bg="#5C4742", font=czcionka2)
+        myLabel3.pack()
+        myLabel3.place(x=420,y=270)
+
+        przyciskRejestracji = Button(self.okno, text="Zarejestruj", command=self.otworzRejestracje, font=("Georgia", 11), bg="#FFF5EE", fg="black", height=1, borderwidth=2, relief="sunken")
         przyciskRejestracji.pack()
+        przyciskRejestracji.place(x=490, y=320)
 
     def otrzymajDane(self):
         nazwaUzytkownika = self.wejscieNazwy.get()

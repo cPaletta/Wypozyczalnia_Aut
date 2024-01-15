@@ -11,16 +11,16 @@ class Admin(Pracownik):
         self.specjalizacja = "Admin"
 
         self.okno = Tk()
-        self.okno.configure(bg="#708090")
-        self.okno.geometry("500x500")
+        self.okno.configure(bg="#A5978B")
+        self.okno.geometry("700x700")
 
-        myLabel = Label(self.okno, text="Admin", bg="#708090")
+        myLabel = Label(self.okno, text="Menu Admina", bg="#A5978B", font=("Georgia", 15))
         myLabel.pack()
 
-        przyciskWyswietleniaUzytkownikow = Button(self.okno, text="Wyswietl uzytkownikow", command=self.wyswietlUzytkownikow)
+        przyciskWyswietleniaUzytkownikow = Button(self.okno, text="Wyswietl uzytkownikow", command=self.wyswietlUzytkownikow,bg="#EEE7D4", font=("Georgia", 12))
         przyciskWyswietleniaUzytkownikow.pack()
 
-        przyciskWyswietleniaSamochodow = Button(self.okno, text="Wyswietl samochody", command=self.wyswietlSamochody)
+        przyciskWyswietleniaSamochodow = Button(self.okno, text="Wyswietl samochody", command=self.wyswietlSamochody,bg="#EEE7D4", font=("Georgia", 12))
         przyciskWyswietleniaSamochodow.pack()
 
         self.bazaSamochodow = bazaSamochodow()
@@ -29,48 +29,48 @@ class Admin(Pracownik):
         self.ZarzadzajOsoba = ZarzadzajOsobami(self.okno)
         self.baza=bazaSamochodow()
 
-        przyciskDodaniaSamochodow = Button(self.okno, text="Dodaj samochod", command=self.ZarzadzajSamochodami.dodajSamochod)
+        przyciskDodaniaSamochodow = Button(self.okno, text="Dodaj samochod", command=self.ZarzadzajSamochodami.dodajSamochod,bg="#EEE7D4", font=("Georgia", 12))
         przyciskDodaniaSamochodow.pack()
         
-        przyciskUsuwaniaSamochodow = Button(self.okno, text="Usun samochod", command=self.ZarzadzajSamochodami.usunSamochod)
+        przyciskUsuwaniaSamochodow = Button(self.okno, text="Usun samochod", command=self.ZarzadzajSamochodami.usunSamochod,bg="#EEE7D4", font=("Georgia", 12))
         przyciskUsuwaniaSamochodow.pack()
 
         
-        dodajOsobe = Button(self.okno, text="Dodaj osobe", command=self.ZarzadzajOsoba.dodajOsobe)
+        dodajOsobe = Button(self.okno, text="Dodaj osobe", command=self.ZarzadzajOsoba.dodajOsobe,bg="#EEE7D4", font=("Georgia", 12))
         dodajOsobe.pack()
 
-        usunOsobe = Button(self.okno, text="Usun osobe", command=self.ZarzadzajOsoba.usunOsobe)
+        usunOsobe = Button(self.okno, text="Usun osobe", command=self.ZarzadzajOsoba.usunOsobe,bg="#EEE7D4", font=("Georgia", 12))
         usunOsobe.pack()
 
-        przyciskWypozycz = Button(self.okno, text="Wypozycz", command=self.WypozyczSamochod)
+        przyciskWypozycz = Button(self.okno, text="Wypozycz", command=self.WypozyczSamochod,bg="#EEE7D4", font=("Georgia", 12))
         przyciskWypozycz.pack()
 
-        przyciskOddaj = Button(self.okno, text="Oddaj", command=self.OddajSamochod)
+        przyciskOddaj = Button(self.okno, text="Oddaj", command=self.OddajSamochod,bg="#EEE7D4", font=("Georgia", 12))
         przyciskOddaj.pack()
 
-        przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj)
+        przyciskWyloguj = Button(self.okno, text="Wyloguj", command=self.wyloguj,bg="#EEE7D4", font=("Georgia", 12))
         przyciskWyloguj.pack()
 
-        myLabell = Label(self.okno, text="Dostępne samochody:", bg="#708090")
+        myLabell = Label(self.okno, text="Dostępne samochody:",bg="#A5978B", font=("Georgia", 12))
         myLabell.pack()
 
         liczba = self.wyswietlSamochodyDost()
-        myLabell.configure(text=f"Liczba dostępnych samochodów: {liczba}")
+        myLabell.configure(text=f"Liczba dostępnych samochodów: {liczba}",bg="#A5978B", font=("Georgia", 12))
 
-        myLabelR = Label(self.okno, text="Zarezerwowane samochody:", bg="#708090")
+        myLabelR = Label(self.okno, text="Zarezerwowane samochody:",bg="#A5978B", font=("Georgia", 12))
         myLabelR.pack()
 
         liczba = self.wyswietlSamochodyZarezerwowane()
-        myLabelR.configure(text=f"Liczba zarezerwowanych samochodów: {liczba}")
+        myLabelR.configure(text=f"Liczba zarezerwowanych samochodów: {liczba}",bg="#A5978B", font=("Georgia", 12))
 
-        myLabelR = Label(self.okno, text="Niedostepne samochody:", bg="#708090")
+        myLabelR = Label(self.okno, text="Niedostepne samochody:",bg="#A5978B", font=("Georgia", 12))
         myLabelR.pack()
 
         liczba = self.wyswietlSamochodyNiedostepne()
-        myLabelR.configure(text=f"Liczba niedostepnych samochodów: {liczba}")
+        myLabelR.configure(text=f"Liczba niedostepnych samochodów: {liczba}",bg="#A5978B", font=("Georgia", 12))
 
 
-        self.lista = Listbox(self.okno, selectmode=SINGLE, width=250, height=250)
+        self.lista = Listbox(self.okno, selectmode=SINGLE, width=103, height=15)
         self.lista.pack()
 
  
